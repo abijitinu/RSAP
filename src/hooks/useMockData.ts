@@ -2,18 +2,18 @@ import { useState, useMemo } from 'react';
 import type { Receipt, Tenant, Program, QualityIssue, ReceiptStatus, ProductItem, Comment } from '../types';
 
 const TENANTS: Tenant[] = [
-    { id: 't1', name: 'MegaMart' },
-    { id: 't2', name: 'QuickShop' },
-    { id: 't3', name: 'FashionHub' },
-    { id: 't4', name: 'TechStore' },
+    { id: 't1', name: 'P&G North America' },
+    { id: 't2', name: 'P&G Europe' },
+    { id: 't3', name: 'P&G Asia' },
+    { id: 't4', name: 'P&G Latin America' },
 ];
 
 const PROGRAMS: Program[] = [
-    { id: 'p1', name: 'Summer Savings', tenantId: 't1' },
-    { id: 'p2', name: 'Back to School', tenantId: 't1' },
-    { id: 'p3', name: 'Loyalty Rewards', tenantId: 't2' },
-    { id: 'p4', name: 'Holiday Special', tenantId: 't3' },
-    { id: 'p5', name: 'New Year Promo', tenantId: 't4' },
+    { id: 'p1', name: 'Pampers Rewards Club', tenantId: 't1' },
+    { id: 'p2', name: 'Tide Eco-Savings', tenantId: 't1' },
+    { id: 'p3', name: 'Gillette Shave Club', tenantId: 't2' },
+    { id: 'p4', name: 'Olay Skin Advisor', tenantId: 't3' },
+    { id: 'p5', name: 'Oral-B Dental Care', tenantId: 't4' },
 ];
 
 const QUALITY_ISSUES: QualityIssue[] = [
@@ -25,34 +25,53 @@ const QUALITY_ISSUES: QualityIssue[] = [
     'Duplicate',
 ];
 
-const STORES = ['Store #101', 'Store #205', 'Store #88', 'Central Branch', 'Northside', 'Airport Kiosk'];
+const STORES = ['Walmart Supercenter', 'Target', 'CVS Pharmacy', 'Walgreens', 'Kroger', 'Costco Wholesale', 'Publix'];
 
 const PRODUCT_NAMES = [
-    'PAMPERS SUPR BX SZ4', 'Coca Cola 12pk', 'Milk 1 Gallon', 'Eggs Dozen',
-    'Whole Wheat Bread', 'Bananas 1lb', 'Apple iPhone Case', 'USB-C Cable',
-    'Notebook 5-Subject', 'Gel Pens 12ct'
+    'Pampers Swaddlers Size 4', 'Tide Pods 81ct', 'Gillette Fusion5 Razor', 'Head & Shoulders Shampoo',
+    'Old Spice Deodorant', 'Crest 3D White Toothpaste', 'Bounty Paper Towels', 'Charmin Ultra Soft',
+    'Olay Regenerist Cream', 'Dawn Dish Soap', 'Swiffer WetJet Refill', 'Febreze Air Effects',
+    'Ariel Laundry Powder', 'Pantene Pro-V Conditioner', 'Vicks VapoRub'
 ];
 
 const generateReceipts = (count: number): Receipt[] => {
     const receipts: Receipt[] = [];
     const now = new Date();
 
+    // Force Edge Cases at the start
+    const edgeCases = [
+        { status: 'Auto Accept', ocr: 98, fraud: 0, quality: 'None' },
+        { status: 'Auto Reject', ocr: 45, fraud: 10, quality: 'Blurry Image' },
+        { status: 'Manual Reject', ocr: 88, fraud: 85, quality: 'Tampered' },
+        { status: 'Manual Accept', ocr: 92, fraud: 5, quality: 'None' },
+        { status: 'Auto Reject', ocr: 95, fraud: 99, quality: 'Duplicate' },
+    ];
+
     for (let i = 0; i < count; i++) {
         const tenant = TENANTS[Math.floor(Math.random() * TENANTS.length)];
         const program = PROGRAMS[Math.floor(Math.random() * PROGRAMS.length)];
         const date = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString();
         const amount = Math.floor(Math.random() * 20000) / 100 + 5;
-        const ocrScore = Math.floor(Math.random() * 30) + 70;
-        const fraudScore = Math.floor(Math.random() * 100);
 
+        let ocrScore = Math.floor(Math.random() * 30) + 70;
+        let fraudScore = Math.floor(Math.random() * 100);
         let status: ReceiptStatus;
         let qualityIssue: QualityIssue = 'None';
 
-        if (ocrScore >= 90) status = Math.random() > 0.05 ? 'Auto Accept' : 'Manual Accept';
-        else status = Math.random() > 0.1 ? 'Auto Reject' : 'Manual Reject';
+        // Override with edge cases for first few items
+        if (i < edgeCases.length) {
+            const ec = edgeCases[i];
+            status = ec.status as ReceiptStatus;
+            ocrScore = ec.ocr;
+            fraudScore = ec.fraud;
+            qualityIssue = ec.quality as QualityIssue;
+        } else {
+            if (ocrScore >= 90) status = Math.random() > 0.05 ? 'Auto Accept' : 'Manual Accept';
+            else status = Math.random() > 0.1 ? 'Auto Reject' : 'Manual Reject';
 
-        if (status.includes('Reject')) qualityIssue = QUALITY_ISSUES[Math.floor(Math.random() * QUALITY_ISSUES.length)];
-        if (fraudScore > 80) { status = 'Auto Reject'; qualityIssue = 'Tampered'; }
+            if (status.includes('Reject')) qualityIssue = QUALITY_ISSUES[Math.floor(Math.random() * QUALITY_ISSUES.length)];
+            if (fraudScore > 80) { status = 'Auto Reject'; qualityIssue = 'Tampered'; }
+        }
 
         // Generate Detailed Data
         const products: ProductItem[] = [];
@@ -98,7 +117,7 @@ const generateReceipts = (count: number): Receipt[] => {
             retailerPostalCode: '56425',
             consumerId: '456789987',
             quota: '5000/5000 used',
-            description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.',
+            description: ['Weekly grocery run including fresh produce and dairy.', 'Office supplies restock for Q3.', 'Gift purchase for holiday exchange.', 'Personal hygiene and pharmacy items.', 'Bulk purchase for company event.'][Math.floor(Math.random() * 5)],
 
             scores: {
                 receiptDetection: Math.floor(Math.random() * 30) + 70,

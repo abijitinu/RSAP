@@ -99,8 +99,7 @@ function App() {
         return <Subscription />;
       case 'Ticketing System':
         return <TicketingSystem />;
-      case 'Ticketing System':
-        return <TicketingSystem />;
+
       case 'Offer List':
         return <OfferList onCreateOffer={() => setActivePage('Create Offer')} />;
       case 'Create Offer':
@@ -127,7 +126,7 @@ function App() {
       )}>
         <Header />
 
-        {!selectedReceipt && activePage !== 'Settings' && activePage !== 'Reports' && (
+        {!selectedReceipt && activePage !== 'Settings' && activePage !== 'Reports' && activePage !== 'Subscription' && (
           <FilterBar
             tenants={tenants}
             programs={programs}

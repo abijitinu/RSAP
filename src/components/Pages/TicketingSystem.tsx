@@ -6,22 +6,28 @@ import { TicketDetail } from './TicketDetail';
 interface Ticket {
     id: string;
     slNo: number;
+    subject: string;
     dateCreated: string;
     raisedBy: string;
-    priority: 'Critical' | 'High' | 'Low';
-    status: 'New' | 'Pending' | 'Closed' | 'Archived';
+    priority: 'Critical' | 'High' | 'Medium' | 'Low';
+    status: 'New' | 'Pending' | 'Closed' | 'Archived' | 'Escalated';
     lastUpdated: string;
     assignedTo: string;
 }
 
 const mockTickets: Ticket[] = [
-    { id: '5765868', slNo: 1, dateCreated: '23 Hrs Ago', raisedBy: 'CS Agent Name', priority: 'Critical', status: 'New', lastUpdated: '23 Hrs Ago', assignedTo: 'Unassigned' },
-    { id: '5765869', slNo: 2, dateCreated: '10 Hrs Ago', raisedBy: 'CS Agent Name', priority: 'High', status: 'New', lastUpdated: '10 Hrs Ago', assignedTo: 'Unassigned' },
-    { id: '5765870', slNo: 3, dateCreated: '10 Min Ago', raisedBy: 'Jane Doe', priority: 'Low', status: 'Archived', lastUpdated: '10 Min Ago', assignedTo: 'Unassigned' },
-    { id: '5765871', slNo: 4, dateCreated: '10 Min Ago', raisedBy: 'John Smith', priority: 'Low', status: 'Pending', lastUpdated: '10 Min Ago', assignedTo: 'Sarah Connor' },
-    { id: '5765872', slNo: 5, dateCreated: '10 Min Ago', raisedBy: 'Mike Ross', priority: 'Low', status: 'Closed', lastUpdated: '10 Min Ago', assignedTo: 'Harvey S.' },
-    { id: '5765873', slNo: 6, dateCreated: '1 Day Ago', raisedBy: 'Rachel Green', priority: 'Low', status: 'Pending', lastUpdated: '5 Hrs Ago', assignedTo: 'Ross G.' },
-    { id: '5765874', slNo: 7, dateCreated: '2 Days Ago', raisedBy: 'Monica G.', priority: 'Medium', status: 'Pending', lastUpdated: '1 Day Ago', assignedTo: 'Chandler B.' },
+    { id: '5765868', slNo: 1, subject: 'Blurry receipt for Pampers bulk purchase', dateCreated: '23 Hrs Ago', raisedBy: 'Sarah Connor', priority: 'Critical', status: 'New', lastUpdated: '23 Hrs Ago', assignedTo: 'Unassigned' },
+    { id: '5765869', slNo: 2, subject: 'Points missing from Tide Eco-Savings', dateCreated: '1 Day Ago', raisedBy: 'Mike Ross', priority: 'High', status: 'Escalated', lastUpdated: '2 Hrs Ago', assignedTo: 'Harvey S.' },
+    { id: '5765870', slNo: 3, subject: 'High-value Olay transaction flagged as fraud', dateCreated: '2 Days Ago', raisedBy: 'Fraud Bot', priority: 'Critical', status: 'Pending', lastUpdated: '5 Hrs Ago', assignedTo: 'Ken Adams' },
+    { id: '5765871', slNo: 4, subject: 'Old Spice coupon code not recognized', dateCreated: '2 Days Ago', raisedBy: 'John Smith', priority: 'Medium', status: 'Closed', lastUpdated: '1 Day Ago', assignedTo: 'Louis Litt' },
+    { id: '5765872', slNo: 5, subject: 'Gillette Razor subscription cancellation', dateCreated: '3 Days Ago', raisedBy: 'Rachel Green', priority: 'Low', status: 'Closed', lastUpdated: '2 Days Ago', assignedTo: 'Ross G.' },
+    { id: '5765873', slNo: 6, subject: 'Duplicate upload of same Charmin receipt', dateCreated: '3 Days Ago', raisedBy: 'Monica G.', priority: 'Medium', status: 'Pending', lastUpdated: '1 Day Ago', assignedTo: 'Chandler B.' },
+    { id: '5765874', slNo: 7, subject: 'Retailer mismatch for Oral-B purchase', dateCreated: '4 Days Ago', raisedBy: 'Phoebe B.', priority: 'Low', status: 'New', lastUpdated: '4 Days Ago', assignedTo: 'Unassigned' },
+    { id: '5765875', slNo: 8, subject: 'Swiffer WetJet refill SKU extraction failed', dateCreated: '5 Days Ago', raisedBy: 'Joey T.', priority: 'Low', status: 'Archived', lastUpdated: '5 Days Ago', assignedTo: 'Unassigned' },
+    { id: '5765876', slNo: 9, subject: 'Head & Shoulders campaign date error', dateCreated: '1 Week Ago', raisedBy: 'Janice L.', priority: 'Low', status: 'Closed', lastUpdated: '6 Days Ago', assignedTo: 'Gunther' },
+    { id: '5765877', slNo: 10, subject: 'System glitch on Febreze bulk upload', dateCreated: '1 Week Ago', raisedBy: 'System Monitor', priority: 'High', status: 'Resolved', lastUpdated: '1 Week Ago', assignedTo: 'IT Support' },
+    { id: '5765878', slNo: 11, subject: 'Crest 3D White rebate not applied', dateCreated: '8 Days Ago', raisedBy: 'Ted Mosby', priority: 'Medium', status: 'New', lastUpdated: '8 Days Ago', assignedTo: 'Unassigned' },
+    { id: '5765879', slNo: 12, subject: 'Invalid store location for Dawn promo', dateCreated: '9 Days Ago', raisedBy: 'Barney S.', priority: 'High', status: 'Pending', lastUpdated: '2 Days Ago', assignedTo: 'Lily A.' },
 ] as Ticket[];
 
 export const TicketingSystem: React.FC = () => {
@@ -32,7 +38,7 @@ export const TicketingSystem: React.FC = () => {
         const styles = {
             Critical: 'bg-[#D4198C] text-white',
             High: 'bg-[#EB754F] text-white',
-            Medium: 'bg-[#707072] text-white',
+            Medium: 'bg-amber-500 text-white',
             Low: 'bg-[#6B2B82] text-white',
         }[priority] || 'bg-gray-100 text-gray-600';
 
@@ -48,14 +54,18 @@ export const TicketingSystem: React.FC = () => {
             New: 'bg-yellow-100 text-yellow-700',
             Pending: 'bg-blue-100 text-blue-700',
             Closed: 'bg-green-100 text-green-700',
+            Resolved: 'bg-green-100 text-green-700',
             Archived: 'bg-gray-100 text-gray-600',
+            Escalated: 'bg-red-100 text-red-700',
         }[status] || 'bg-gray-100 text-gray-600';
 
         const dotColors = {
             New: 'bg-yellow-500',
             Pending: 'bg-blue-500',
             Closed: 'bg-green-500',
+            Resolved: 'bg-green-500',
             Archived: 'bg-gray-500',
+            Escalated: 'bg-red-500',
         }[status] || 'bg-gray-500';
 
         return (
@@ -146,7 +156,7 @@ export const TicketingSystem: React.FC = () => {
                         <thead>
                             <tr className="bg-gray-50/50 border-b border-gray-100/50">
                                 <th className="py-3 px-6 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider w-16">Action</th>
-                                <th className="py-3 px-4 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider">SL NO</th>
+                                <th className="py-3 px-4 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider">Subject</th>
                                 <th className="py-3 px-4 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider">Date Created</th>
                                 <th className="py-3 px-4 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider">Raised By</th>
                                 <th className="py-3 px-4 text-[11px] font-heading font-semibold text-gray-500 uppercase tracking-wider">Priority</th>
@@ -167,9 +177,13 @@ export const TicketingSystem: React.FC = () => {
                                             <Eye className="w-4 h-4" />
                                         </button>
                                     </td>
-                                    <td className="py-3 px-4 text-[13px] text-gray-500 font-mono">{ticket.slNo}</td>
-                                    <td className="py-3 px-4 text-[13px] text-[#1d1d1f]">{ticket.dateCreated}</td>
-                                    <td className="py-3 px-4 text-[13px] text-[#1d1d1f] font-medium">{ticket.raisedBy}</td>
+                                    <td className="py-3 px-4">
+                                        <span className="text-[13px] font-medium text-[#1d1d1f] block truncate max-w-[200px]" title={ticket.subject}>
+                                            {ticket.subject}
+                                        </span>
+                                    </td>
+                                    <td className="py-3 px-4 text-[13px] text-gray-500">{ticket.dateCreated}</td>
+                                    <td className="py-3 px-4 text-[13px] text-[#1d1d1f]">{ticket.raisedBy}</td>
                                     <td className="py-3 px-4">
                                         <PriorityBadge priority={ticket.priority} />
                                     </td>

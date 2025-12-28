@@ -14,7 +14,7 @@ export const Settings: React.FC = () => {
     );
 
     return (
-        <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="max-w-3xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="mb-6">
                 <h2 className="text-[34px] leading-[41px] font-bold text-[#1d1d1f] tracking-tight">Settings</h2>
                 <p className="text-[17px] text-gray-500 font-normal">Manage system automation and preferences.</p>

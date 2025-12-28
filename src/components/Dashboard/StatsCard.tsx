@@ -16,7 +16,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({ title, value, change, tool
         <div className="bg-white p-5 rounded-[22px] shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-black/5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-300 relative group">
             {/* Header */}
             <div className="flex items-center justify-between mb-3">
-                <span className="text-[13px] font-heading font-semibold text-gray-500 uppercase tracking-wide leading-none">{title}</span>
+                <span className="text-[13px] font-aller font-semibold text-gray-500 uppercase tracking-wide leading-none">{title}</span>
 
                 {/* SF Symbol Style Info Icon */}
                 <div className="text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-help">
@@ -29,7 +29,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({ title, value, change, tool
             {/* Value */}
             <div className="flex items-baseline gap-2 mb-1">
                 <span className={clsx(
-                    "text-[32px] font-semibold tracking-tight leading-snug",
+                    "text-[32px] font-chevin font-bold tracking-tight leading-snug",
                     type === 'negative' ? 'text-[#FF3B30]' : 'text-[#1d1d1f]'
                 )}>
                     {value}
@@ -50,11 +50,11 @@ export const StatsCard: React.FC<StatsCardProps> = ({ title, value, change, tool
                         )}
                     </div>
                     <span className={clsx(
-                        "text-[13px] font-medium",
+                        "text-[13px] font-chevin font-medium",
                         change >= 0 ? "text-[#34C759]" : "text-[#FF3B30]"
                     )}>
                         {Math.abs(change)}%
-                        <span className="text-gray-400 font-normal ml-1">vs last month</span>
+                        <span className="text-gray-400 font-aller font-normal ml-1">vs last month</span>
                     </span>
                 </div>
             )}

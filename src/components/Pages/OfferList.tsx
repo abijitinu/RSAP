@@ -20,11 +20,17 @@ interface OfferListProps {
 export const OfferList: React.FC<OfferListProps> = ({ onCreateOffer }) => {
     // Mock Data
     const offers: Offer[] = [
-        { id: 'OFF-001', name: 'Summer Diaper Sale', type: 'Discount', startDate: '06/01/2025', endDate: '06/30/2025', status: 'Active', retailers: ['Walmart', 'Target'], budget: 5000 },
-        { id: 'OFF-002', name: 'BOGO Wipes', type: 'BOGO', startDate: '07/01/2025', endDate: '07/15/2025', status: 'Scheduled', retailers: ['Kroger'], budget: 2000 },
-        { id: 'OFF-003', name: 'New User Bonus', type: 'Cashback', startDate: '01/01/2025', endDate: '12/31/2025', status: 'Active', retailers: ['All'], budget: 10000 },
-        { id: 'OFF-004', name: 'Winter Clearance', type: 'Discount', startDate: '12/01/2024', endDate: '12/31/2024', status: 'Expired', retailers: ['Walmart'], budget: 3000 },
-        { id: 'OFF-005', name: 'Loyalty Rewards', type: 'Loyalty', startDate: '03/01/2025', endDate: '03/31/2025', status: 'Draft', retailers: ['Walgreens'], budget: 1500 },
+        { id: 'OFF-001', name: 'Pampers Annual Savings', type: 'Discount', startDate: '06/01/2025', endDate: '06/30/2025', status: 'Active', retailers: ['Walmart', 'Target'], budget: 50000 },
+        { id: 'OFF-002', name: 'Tide Pods BOGO Event', type: 'BOGO', startDate: '07/01/2025', endDate: '07/15/2025', status: 'Scheduled', retailers: ['Kroger', 'Publix'], budget: 22000 },
+        { id: 'OFF-003', name: 'Olay New User Bonus', type: 'Cashback', startDate: '01/01/2025', endDate: '12/31/2025', status: 'Active', retailers: ['All'], budget: 150000 },
+        { id: 'OFF-004', name: 'Gillette Holiday Pack', type: 'Bundle', startDate: '12/01/2024', endDate: '12/31/2024', status: 'Expired', retailers: ['Walmart', 'CVS'], budget: 30000 },
+        { id: 'OFF-005', name: 'Head & Shoulders Loyalty', type: 'Loyalty', startDate: '03/01/2025', endDate: '03/31/2025', status: 'Draft', retailers: ['Walgreens'], budget: 15000 },
+        { id: 'OFF-006', name: 'Old Spice Flash Sale', type: 'Discount', startDate: '04/01/2025', endDate: '04/02/2025', status: 'Scheduled', retailers: ['Target'], budget: 5000 },
+        { id: 'OFF-007', name: 'Oral-B Back to School', type: 'Bundle', startDate: '08/15/2025', endDate: '09/15/2025', status: 'Draft', retailers: ['Walmart', 'Target', 'Costco'], budget: 80000 },
+        { id: 'OFF-008', name: 'Dawn Dish Soap Q4 Push', type: 'Cashback', startDate: '10/01/2025', endDate: '12/31/2025', status: 'Draft', retailers: ['All'], budget: 250000 },
+        { id: 'OFF-009', name: 'Pampers Pure Launch', type: 'Sample', startDate: '05/01/2025', endDate: '05/30/2025', status: 'Scheduled', retailers: ['Whole Foods', 'Sprouts'], budget: 45000 },
+        { id: 'OFF-010', name: 'Bounty & Charmin Bundle', type: 'Bundle', startDate: '11/15/2024', endDate: '12/25/2024', status: 'Expired', retailers: ['Amazon', 'Target'], budget: 120000 },
+        { id: 'OFF-011', name: 'Swiffer Spring Cleaning', type: 'Discount', startDate: '04/01/2025', endDate: '04/30/2025', status: 'Active', retailers: ['Kroger', 'Meijer'], budget: 35000 }
     ];
 
     const StatusBadge = ({ status }: { status: string }) => {

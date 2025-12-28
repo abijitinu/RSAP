@@ -185,6 +185,11 @@ export const Subscription: React.FC = () => {
                                                 </div>
                                                 <span className="text-[15px] font-bold text-[#1d1d1f] mb-1">{plan.name}</span>
                                                 <span className="text-[13px] text-gray-500">{plan.price} <span className="font-normal text-gray-400">{plan.period}</span></span>
+                                                {plan.current && (
+                                                    <span className="mt-2 px-2 py-0.5 bg-[#6B2B82]/10 text-[#6B2B82] text-[10px] font-bold uppercase tracking-wide rounded-full">
+                                                        Current Plan
+                                                    </span>
+                                                )}
                                             </div>
                                         </th>
                                     ))}

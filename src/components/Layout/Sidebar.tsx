@@ -30,7 +30,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ activePage, setActivePage, isC
         )}>
             {/* Logo Area */}
             <div className={clsx("h-14 flex items-center mt-2 transition-all", isCollapsed ? "justify-center px-0" : "px-6")}>
-                <div className="flex items-center gap-3 text-[#1d1d1f] font-semibold text-base tracking-tight opacity-90">
+                <a
+                    href="https://www.abijit.com/project-sales-portal.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-[#1d1d1f] font-semibold text-base tracking-tight opacity-90 hover:opacity-100 transition-opacity"
+                >
                     <img src={rsapLogo} alt="RSAP Logo" className="h-8 w-auto object-contain" />
                     {!isCollapsed && (
                         <div className="flex flex-col leading-none animate-in fade-in duration-300">
@@ -38,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activePage, setActivePage, isC
                             <span className="text-[9px] text-[#86868B] font-medium tracking-wide">Receipt Sales Analysis Portal</span>
                         </div>
                     )}
-                </div>
+                </a>
             </div>
 
             {/* Navigation */}

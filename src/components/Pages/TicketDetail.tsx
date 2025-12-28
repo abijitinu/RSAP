@@ -17,7 +17,7 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ ticketId = '45678909
         program: 'Oral B Electric Brush',
         tenant: 'Oral B',
         priority: 'Critical',
-        problemStatement: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+        problemStatement: 'The receipt image uploaded by the customer is blurry and the store name is not clearly visible. The automated system rejected it due to low OCR confidence scores. Customer insists the purchase is valid and falls within the campaign period. Requesting manual verification of the attached image.',
         createdBy: 'Consumer Support Agent',
         createdDate: '19/02/2021 17:07:02',
         assignedTo: 'L1 Agent',
@@ -25,9 +25,9 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ ticketId = '45678909
     };
 
     const ticketHistory = [
-        { id: 1, modified: '1 Day ago', supportName: 'John William', comment: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.' },
-        { id: 2, modified: '13 hours ago', supportName: 'Tom Jerry', comment: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.' },
-        { id: 3, modified: '8 hours ago', supportName: 'Tom Jerry', comment: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.' },
+        { id: 1, modified: '1 Day ago', supportName: 'John William', comment: 'Reviewing the audit logs. It appears the user attempted to upload this receipt three times before raising the ticket. Flagging for potential duplicate check.' },
+        { id: 2, modified: '13 hours ago', supportName: 'Tom Jerry', comment: 'Contacted the customer to request a clearer photo of the receipt. Customer has agreed to resubmit via email.' },
+        { id: 3, modified: '8 hours ago', supportName: 'Tom Jerry', comment: 'Received new image via email. Quality is better but the date is still ambiguous. Escalating to Team Lead for final approval.' },
     ];
 
     return (
